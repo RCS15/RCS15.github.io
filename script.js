@@ -1,92 +1,67 @@
+// ==========================
+// SLIDER LOGIC
+// ==========================
 const slides = document.querySelectorAll('.slide');
 const slider = document.querySelector('.slider');
 const nextBtn = document.getElementById('next');
 const prevBtn = document.getElementById('prev');
 
 let currentIndex = 0;
+let puisiTimeouts = [];
+let puisiSudahDimunculkan = false;
 
-// Di dalam function showSlide(index), tambahkan:
+// Mapping animasi
+const slideAnimations = [
+  'bounceIn', 'fadeInRotate', 'slideUp', 'heartBeat', 'rocketLaunch',
+  'photoFlash', 'zoomIn', 'crownShine', 'rainbowFade', 'spaceIn',
+  'typewriter', 'glowPulse', 'micPop', 'envelopeDrop'
+];
+
+// Fungsi tampilkan slide
 function showSlide(index) {
-  if (index < 0) index = 0;
-  if (index >= slides.length) index = slides.length - 1;
+  if (slides.length === 0) return; // Antisipasi error
+  index = Math.max(0, Math.min(index, slides.length - 1));
 
-  // Reset semua slide
-  slides.forEach((slide, i) => {
+  slides.forEach(slide => {
     slide.classList.remove("active");
-    // Reset animasi dengan menghapus dan menambahkan kembali class animasi
     const h1 = slide.querySelector('h1');
     if (h1) {
       h1.style.animation = 'none';
-      void h1.offsetWidth; // Trigger reflow
+      void h1.offsetWidth; // Reset animasi
     }
-
-    
   });
 
-  // Tampilkan slide yang sesuai
   slides[index].classList.add("active");
   currentIndex = index;
 
-  // Trigger animasi untuk slide aktif
   const activeH1 = slides[index].querySelector('h1');
-  if (activeH1) {
-    // Dapatkan nama animasi dari CSS
-    let animationName = '';
-    switch(index) {
-      case 0: animationName = 'bounceIn'; break;
-      case 1: animationName = 'fadeInRotate'; break;
-      case 2: animationName = 'slideUp'; break;
-      case 3: animationName = 'heartBeat'; break;
-      case 4: animationName = 'rocketLaunch'; break;
-      case 5: animationName = 'photoFlash'; break;
-      case 6: animationName = 'zoomIn'; break;
-      case 7: animationName = 'crownShine'; break;
-      case 8: animationName = 'rainbowFade'; break;
-      case 9: animationName = 'spaceIn'; break;
-      case 10: animationName = 'typewriter'; break;
-      case 11: animationName = 'glowPulse'; break;
-      case 12: animationName = 'micPop'; break;
-      case 13: animationName = 'envelopeDrop'; break;
-    }
-    
-    if (animationName) {
-      activeH1.style.animation = `${animationName} ${index < 5 ? '1s' : '1.5s'} ease-out forwards`;
-    }
+  if (activeH1 && slideAnimations[index]) {
+    const duration = index < 5 ? '1s' : '1.5s';
+    activeH1.style.animation = `${slideAnimations[index]} ${duration} ease-out forwards`;
   }
 
   // Efek puisi hanya di slide 15 (index 14)
   if (index === 14 && !puisiSudahDimunculkan) {
     ketikPuisi();
-  }
-
-  // Reset puisi jika keluar
-  if (index !== 14) {
-    puisiSudahDimunculkan = false;
-    document.getElementById("puisi-text").innerHTML = "";
-    puisiTimeouts.forEach(clearTimeout);
-    puisiTimeouts = [];
+  } else if (index !== 14) {
+    resetPuisi();
   }
 }
 
+// ==========================
+// NAVIGATION
+// ==========================
+nextBtn?.addEventListener('click', () => showSlide(currentIndex + 1));
+prevBtn?.addEventListener('click', () => showSlide(currentIndex - 1));
 
-nextBtn.addEventListener('click', () => {
-  showSlide(currentIndex + 1);
-});
-
-prevBtn.addEventListener('click', () => {
-  showSlide(currentIndex - 1);
-});
-
-// Optional: Keyboard control
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') showSlide(currentIndex + 1);
   if (e.key === 'ArrowLeft') showSlide(currentIndex - 1);
 });
 
-
-// ----------------------------
-// Efek puisi: ketik per kata (anti klik cepat)
-// ----------------------------
+// ==========================
+// PUISI EFFECT
+// ==========================
 const puisiKata = [
   "Di", "hari", "ulang", "tahunmu,", "yang", "ke", "dua", "puluh,", 
   "aku", "tak", "membawa", "kado", "mewah,", 
@@ -96,73 +71,104 @@ const puisiKata = [
   ""
 ];
 
-let puisiTimeouts = []; // menyimpan timeout IDs
-let puisiSudahDimunculkan = false;
-
 function ketikPuisi() {
   const target = document.getElementById("puisi-text");
+  if (!target) return;
+
   target.innerHTML = "";
   puisiTimeouts.forEach(clearTimeout);
   puisiTimeouts = [];
 
   let delay = 0;
-  for (let i = 0; i < puisiKata.length; i++) {
-    // Add extra delay for line breaks
-    if (puisiKata[i] === "") {
-      delay += 1000; // Add 1 second pause for line breaks
-      continue;
+  puisiKata.forEach((kata) => {
+    if (kata === "") {
+      delay += 1000;
+      return;
     }
-
     const timeoutId = setTimeout(() => {
       const span = document.createElement("span");
       span.className = "kata";
-      span.textContent = puisiKata[i] + " "; // Add space after each word
-      span.style.animationDelay = "0.2s"; // Slight delay before fade in
-      span.style.animationDuration = "1s"; // Slower fade in
+      span.textContent = kata + " ";
       target.appendChild(span);
     }, delay);
-    
-    delay += 500; // Increased from 400ms to 600ms per word
+    delay += 500;
     puisiTimeouts.push(timeoutId);
-  }
+  });
 
   puisiSudahDimunculkan = true;
 }
 
-
-
-// Audio Control
-const bgMusic = document.getElementById('bgMusic');
-const musicToggle = document.getElementById('musicToggle');
-let isMusicPlaying = false;
-
-// Fungsi untuk memutar/menjeda musik
-function toggleMusic() {
-  if (isMusicPlaying) {
-    bgMusic.pause();
-    musicToggle.textContent = '🔇';
-    musicToggle.classList.add('muted');
-  } else {
-    bgMusic.play();
-    musicToggle.textContent = '🔊';
-    musicToggle.classList.remove('muted');
-  }
-  isMusicPlaying = !isMusicPlaying;
+function resetPuisi() {
+  const target = document.getElementById("puisi-text");
+  if (!target) return;
+  puisiSudahDimunculkan = false;
+  target.innerHTML = "";
+  puisiTimeouts.forEach(clearTimeout);
+  puisiTimeouts = [];
 }
 
-// Event listener untuk tombol musik
-musicToggle.addEventListener('click', toggleMusic);
+// ==========================
+// MUSIC CONTROL
+// ==========================
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+const musicPermissionModal = document.getElementById('musicPermissionModal');
+const allowMusicBtn = document.getElementById('allowMusic');
+const denyMusicBtn = document.getElementById('denyMusic');
 
-// Mulai musik otomatis (dengan interaksi pengguna terlebih dahulu)
-document.body.addEventListener('click', function initAudio() {
-  if (!isMusicPlaying) {
-    bgMusic.volume = 0.3; // Set volume rendah
+let isMusicPlaying = false;
+let musicPermissionAsked = false;
+
+function showMusicPermission() {
+  if (musicPermissionAsked || !musicPermissionModal) return;
+  musicPermissionModal.style.display = 'block';
+  musicPermissionModal.querySelector('.modal-content')?.style.setProperty('animation', 'slideDown 0.4s ease-out');
+  musicPermissionAsked = true;
+  if (musicToggle) musicToggle.style.display = 'none';
+}
+
+function hideMusicPermission() {
+  if (musicPermissionModal) musicPermissionModal.style.display = 'none';
+}
+
+function toggleMusic() {
+  if (!bgMusic) return;
+  if (isMusicPlaying) {
+    bgMusic.pause();
+    musicToggle?.classList.add('muted');
+    isMusicPlaying = false;
+  } else {
     bgMusic.play()
       .then(() => {
         isMusicPlaying = true;
-        musicToggle.textContent = '🔊';
+        musicToggle?.classList.remove('muted');
       })
-      .catch(e => console.log("Autoplay prevented:", e));
+      .catch(e => console.log("Playback prevented:", e));
   }
-  document.body.removeEventListener('click', initAudio);
-}, { once: true });
+}
+
+musicToggle?.addEventListener('click', toggleMusic);
+
+allowMusicBtn?.addEventListener('click', () => {
+  hideMusicPermission();
+  if (musicToggle) musicToggle.style.display = 'block';
+  if (bgMusic) bgMusic.volume = 0.3;
+
+  document.body.addEventListener('click', function initAudio() {
+    toggleMusic();
+    document.body.removeEventListener('click', initAudio);
+  }, { once: true });
+});
+
+denyMusicBtn?.addEventListener('click', () => {
+  hideMusicPermission();
+  if (musicToggle) musicToggle.style.display = 'block';
+});
+
+window.addEventListener('load', () => {
+  setTimeout(showMusicPermission, 1000);
+});
+
+musicPermissionModal?.addEventListener('click', (e) => {
+  if (e.target === musicPermissionModal) hideMusicPermission();
+});
