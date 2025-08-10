@@ -7,7 +7,7 @@ body {
 }
 
 .slide h1 {
-  font-family: 'Dancing Script', cursive;
+  font-family: cursive;
   font-size: 3.5em; /* Sedikit lebih besar */
   margin-bottom: 0.5em;
   color: #d23669; /* Warna pink tua yang elegan */
@@ -26,7 +26,7 @@ body {
 /* Khusus untuk slide puisi */
 .puisi-slide h1 {
   color: #d23669;
-  font-family: 'Dancing Script', cursive;
+  font-family: cursive;
 }
 
 #puisi-text {
