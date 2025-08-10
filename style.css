@@ -1,16 +1,57 @@
+/* ===========================
+   GLOBAL
+=========================== */
 body {
-  font-family: 'Poppins', sans-serif;
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', 'Poppins', sans-serif;
   background-color: #ffeaea;
   overflow: hidden;
 }
 
+/* ===========================
+   SLIDE UMUM
+=========================== */
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  color: #333;
+  padding: 2rem;
+  box-sizing: border-box;
+  text-align: center;
+  transform: scale(0.98);
+  filter: blur(2px);
+  transition: opacity 0.8s ease, transform 0.6s ease, filter 0.6s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
 .slide h1 {
   font-family: cursive;
-  font-size: 3.5em; /* Sedikit lebih besar */
+  font-size: 3em;
   margin-bottom: 0.5em;
-  color: #d23669; /* Warna pink tua yang elegan */
+  color: #d23669;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -23,7 +64,9 @@ body {
   margin: 0;
 }
 
-/* Khusus untuk slide puisi */
+/* ===========================
+   SLIDE KHUSUS PUISI
+=========================== */
 .puisi-slide h1 {
   color: #d23669;
   font-family: cursive;
@@ -31,64 +74,78 @@ body {
 
 #puisi-text {
   font-family: sans-serif;
-  font-size: 1em;
-  line-height: 1.8;
-  color: #555;
+  font-size: 1.8em;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  color: #222;
+  font-style: italic;
   font-weight: 300;
 }
 
-/* Animasi tambahan untuk teks */
+/* ===========================
+   ANIMASI TEKS & KATA
+=========================== */
 @keyframes textGlow {
   0% { text-shadow: 0 0 5px rgba(210, 54, 105, 0.3); }
   50% { text-shadow: 0 0 15px rgba(210, 54, 105, 0.5); }
   100% { text-shadow: 0 0 5px rgba(210, 54, 105, 0.3); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeZoomIn {
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
 .slide-title {
+  opacity: 0;
+  transform: scale(0.8);
   animation: fadeZoomIn 1s ease-out forwards, textGlow 3s ease-in-out infinite;
   animation-delay: 0.3s;
 }
 
-.slider {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0; left: 0;
+.slide-subtitle {
   opacity: 0;
-  transition: opacity 0.8s ease;
-  z-index: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  color: #333;
-  padding: 2rem;
-  box-sizing: border-box;
-  text-align: center;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease-out forwards;
+  animation-delay: 0.8s;
 }
 
-.slide.active {
-  opacity: 1;
-  z-index: 1;
+.kata {
+  opacity: 0;
+  display: inline-block;
+  margin-right: 4px;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.2s;
 }
 
-.slide h1 {
-  font-size: 3em;
-  margin-bottom: 0.5em;
+/* ===========================
+   DEKORASI & IKON
+=========================== */
+.balloon {
+  width: 150px;
+  margin-top: 20px;
+  animation: float 3s ease-in-out infinite;
 }
 
-.slide p {
-  font-size: 1.5em;
-}
-
+/* ===========================
+   KONTROL SLIDE
+=========================== */
 .controls {
   position: absolute;
   bottom: 30px;
@@ -129,7 +186,9 @@ body {
   transform: translateX(-4px);
 }
 
-
+/* ===========================
+   BUTTON UMUM
+=========================== */
 button {
   padding: 1rem 2rem;
   font-size: 1rem;
@@ -142,108 +201,13 @@ button {
   z-index: 9999;
 }
 
-
 button:hover {
   background-color: #ff3e6c;
 }
 
-
-#puisi-text {
-  font-size: 1.8em;
-  line-height: 1.6;
-  max-width: 80%;
-  margin: 0 auto;
-  text-align: center;
-  color: #222;
-  font-style: italic;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px); /* Slightly bigger initial offset */
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.kata {
-  opacity: 0;
-  display: inline-block;
-  margin-right: 4px;
-  animation: fadeIn 1s ease forwards; /* Slower animation */
-  animation-delay: 0.2s; /* Added delay before animation starts */
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-.slide {
-  transform: scale(0.98);
-  filter: blur(2px);
-  transition: opacity 0.8s ease, transform 0.6s ease, filter 0.6s ease;
-}
-
-.slide.active {
-  transform: scale(1);
-  filter: blur(0);
-}
-
-
-/* ANIMASI MASUK */
-.slide-title {
-  opacity: 0;
-  transform: scale(0.8);
-  animation: fadeZoomIn 1s ease-out forwards;
-  animation-delay: 0.3s;
-}
-
-.slide-subtitle {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 1s ease-out forwards;
-  animation-delay: 0.8s;
-}
-
-.balloon {
-  width: 150px;
-  margin-top: 20px;
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Animations */
-@keyframes fadeZoomIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-  100% { transform: translateY(0); }
-}
-
-
+/* ===========================
+   MUSIC BUTTON
+=========================== */
 .music-btn {
   position: fixed;
   top: 20px;
