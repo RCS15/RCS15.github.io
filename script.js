@@ -5,6 +5,7 @@ const prevBtn = document.getElementById('prev');
 
 let currentIndex = 0;
 
+// Di dalam function showSlide(index), tambahkan:
 function showSlide(index) {
   if (index < 0) index = 0;
   if (index >= slides.length) index = slides.length - 1;
@@ -12,11 +13,46 @@ function showSlide(index) {
   // Reset semua slide
   slides.forEach((slide, i) => {
     slide.classList.remove("active");
+    // Reset animasi dengan menghapus dan menambahkan kembali class animasi
+    const h1 = slide.querySelector('h1');
+    if (h1) {
+      h1.style.animation = 'none';
+      void h1.offsetWidth; // Trigger reflow
+    }
+
+    
   });
 
   // Tampilkan slide yang sesuai
   slides[index].classList.add("active");
   currentIndex = index;
+
+  // Trigger animasi untuk slide aktif
+  const activeH1 = slides[index].querySelector('h1');
+  if (activeH1) {
+    // Dapatkan nama animasi dari CSS
+    let animationName = '';
+    switch(index) {
+      case 0: animationName = 'bounceIn'; break;
+      case 1: animationName = 'fadeInRotate'; break;
+      case 2: animationName = 'slideUp'; break;
+      case 3: animationName = 'heartBeat'; break;
+      case 4: animationName = 'rocketLaunch'; break;
+      case 5: animationName = 'photoFlash'; break;
+      case 6: animationName = 'zoomIn'; break;
+      case 7: animationName = 'crownShine'; break;
+      case 8: animationName = 'rainbowFade'; break;
+      case 9: animationName = 'spaceIn'; break;
+      case 10: animationName = 'typewriter'; break;
+      case 11: animationName = 'glowPulse'; break;
+      case 12: animationName = 'micPop'; break;
+      case 13: animationName = 'envelopeDrop'; break;
+    }
+    
+    if (animationName) {
+      activeH1.style.animation = `${animationName} ${index < 5 ? '1s' : '1.5s'} ease-out forwards`;
+    }
+  }
 
   // Efek puisi hanya di slide 15 (index 14)
   if (index === 14 && !puisiSudahDimunculkan) {
