@@ -10,6 +10,11 @@ let currentIndex = 0;
 let puisiTimeouts = [];
 let puisiSudahDimunculkan = false;
 
+window.addEventListener('load', () => {
+  setTimeout(showMusicPermission, 1000);
+  checkLastSlide(); // Tambahkan ini
+});
+
 // Mapping animasi
 const slideAnimations = [
   'bounceIn', 'fadeInRotate', 'slideUp', 'heartBeat', 'rocketLaunch',
@@ -46,6 +51,8 @@ function showSlide(index) {
   } else if (index !== 14) {
     resetPuisi();
   }
+  
+  checkLastSlide();
 }
 
 // ==========================
@@ -172,3 +179,27 @@ window.addEventListener('load', () => {
 musicPermissionModal?.addEventListener('click', (e) => {
   if (e.target === musicPermissionModal) hideMusicPermission();
 });
+
+
+// ==========================
+// RESTART FUNCTIONALITY
+// ==========================
+const restartBtn = document.getElementById('restartBtn');
+
+// Cek jika sudah mencapai slide terakhir
+function checkLastSlide() {
+  if (currentIndex === slides.length - 1) {
+    restartBtn.style.display = 'flex';
+  } else {
+    restartBtn.style.display = 'none';
+  }
+}
+
+// Fungsi untuk restart slide
+function restartSlides() {
+  showSlide(0);
+  restartBtn.style.display = 'none';
+}
+
+// Event listener untuk tombol restart
+restartBtn?.addEventListener('click', restartSlides);
