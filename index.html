@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ucapan Ulang Tahun ke-20 Lita Putri Lestari</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bgMusic" loop>
+      <source src="Happy Birthday song SLOW version.mp3" type="audio/mpeg">
+      Browser Anda tidak mendukung elemen audio.
+    </audio>
+  <button id="musicToggle" class="music-btn">
+  <svg class="music-icon" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z"/>
+  </svg>
+</button>
+
+  <div class="slider">
+    <div class="slide active" id="slide1">
+      <h1 class="slide-title">Selamat Ulang Tahun, Lita</h1>
+      <p class="slide-subtitle">Hari ini adalah moment spesial</p>
+      <p class="slide-subtitle">Selamat merayakan 20 tahun perjalanan hidupmu</p>
+      <h1 class="slide-subtitle">🎉</h1>
+    </div>
+    <div class="slide" id="slide2">
+      <h1 class="slide-title">Doa Terbaik</h1>
+      <p>semoga kamu selalu diberi kesehatan, kebahagiaan, dan keberkahan</p>
+      <h1>✨</h1>
+    </div>
+    <div class="slide" id="slide3">
+      <h1>Harapan untuk usia baru</h1>
+      <p>Semoga impian-impianmu perlahan menjadi nyata dan kamu semakin percaya diri menghadapi masa depan.</p>
+      <h1>🥳</h1>
+    </div>
+    <div class="slide" id="slide4">
+      <h1>Terima Kasih Telah Menjadi Teman</h1>
+      <p>Terima kasih sudah menjadi teman yang baik dan menyenangkan.</p>
+      <p> Kehadiranmu memberi warna dalam hidup banyak orang.</p>
+      <h1>💖</h1>
+    </div>
+    <div class="slide" id="slide5">
+      <h1>Selamat Datang di Usia 20-an!</h1>
+      <p>Semoga tahun-tahun mendatang penuh pengalaman baru, pelajaran berharga, dan momen yang membahagiakan.</p>
+      <h1>🎁</h1>
+    </div>
+    <div class="slide" id="slide6">
+      <h1>Jejak Cerita</h1>
+      <p>Setiap moment yang kamu alami semuanya menjadi bagian berharga dari perjalananmu.</p>
+      <h1>📸</h1>
+    </div>
+    <div class="slide" id="slide7">
+      <h1>Perjalanan Hebat</h1>
+      <p>Kamu sudah tumbuh menjadi pribadi yang kuat dan tabah.</p>
+      <h1>🥳</h1>
+    </div>
+    <div class="slide" id="slide8">
+      <h1>Kamu Itu Istimewa</h1>
+      <p>Ingat, kamu berharga jadi Jangan pernah ragu pada dirimu sendiri.</p>
+      <h1>👑</h1>
+    </div> 
+    <div class="slide" id="slide9">
+      <h1>Warna-Warni Hidupmu</h1>
+      <p>Seperti pelangi setelah hujan, kehadiranmu selalu membawa keceriaan dan kebahagiaan.</p>
+      <h1>🌈</h1>
+    </div>
+    <div class="slide" id="slide10">
+      <h1>20 Tahun Pertama yang Mengagumkan</h1>
+      <p>Kini saatnya memulai babak baru di usia 20-an.</p>
+      <p>Semoga tahun-tahun mendatang penuh dengan pencapaian dan prestasi untukmu!</p>
+      <h1>🚀</h1>
+    </div>
+    <div class="slide" id="slide11">
+      <h1>Pesan Kecil</h1>
+      <p>Tetaplah menjadi dirimu yang penuh cerita, ceria, dan penuh semangat.</p>
+      <h1>📝</h1>
+    </div>
+    <div class="slide" id="slide12">
+      <h1>Terus Bersinar</h1>
+      <p>Semoga setiap langkahmu membawa cahaya, baik untuk dirimu maupun orang di sekitarmu.</p>
+      <h1>🌟</h1>
+    </div>
+    <div class="slide" id="slide13">
+      <h1>Suara dari Hati</h1>
+      <p>Ada banyak orang yang senang melihatmu tumbuh dan berkembang dan berharap hal-hal baik selalu menghampirimu.</p>
+      <h1>🎤</h1>
+    </div>
+    <div class="slide" id="slide14">
+      <h1>Ucapan Tulus</h1>
+      <p>Setiap kata ini lahir dari hati yang ingin melihatmu selalu bahagia.</p>
+      <h1>💌</h1>
+    </div>
+    <div class="slide puisi-slide" id="slide15">
+      <div class="puisi-container">
+        <h1>Sebuah Puisi Kecil</h1>
+        <div id="puisi-text"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="prev" class="nav-btn">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <button id="next" class="nav-btn">
+      <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,299 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #ffeaea;
+  overflow: hidden;
+}
+
+.slide h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 3.5em; /* Sedikit lebih besar */
+  margin-bottom: 0.5em;
+  color: #d23669; /* Warna pink tua yang elegan */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slide p {
+  font-family: cursive;
+  font-size: 1.5em;
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0;
+}
+
+/* Khusus untuk slide puisi */
+.puisi-slide h1 {
+  color: #d23669;
+  font-family: 'Dancing Script', cursive;
+}
+
+#puisi-text {
+  font-family: cursive;
+  font-size: 1em;
+  line-height: 1.8;
+  color: #555;
+  font-weight: 300;
+}
+
+/* Animasi tambahan untuk teks */
+@keyframes textGlow {
+  0% { text-shadow: 0 0 5px rgba(210, 54, 105, 0.3); }
+  50% { text-shadow: 0 0 15px rgba(210, 54, 105, 0.5); }
+  100% { text-shadow: 0 0 5px rgba(210, 54, 105, 0.3); }
+}
+
+.slide-title {
+  animation: fadeZoomIn 1s ease-out forwards, textGlow 3s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  color: #333;
+  padding: 2rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide h1 {
+  font-size: 3em;
+  margin-bottom: 0.5em;
+}
+
+.slide p {
+  font-size: 1.5em;
+}
+
+.controls {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60px;
+  box-sizing: border-box;
+  z-index: 9999;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.1rem;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.nav-btn:hover {
+  transform: scale(1.2) rotate(1deg);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  stroke: #ff6f91;
+  transition: stroke 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover .icon {
+  stroke: #ff3e6c;
+  transform: translateX(4px);
+}
+
+.nav-btn#prev:hover .icon {
+  transform: translateX(-4px);
+}
+
+
+button {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  background-color: #ff6f91;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+  z-index: 9999;
+}
+
+
+button:hover {
+  background-color: #ff3e6c;
+}
+
+
+#puisi-text {
+  font-size: 1.8em;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  color: #222;
+  font-style: italic;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); /* Slightly bigger initial offset */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kata {
+  opacity: 0;
+  display: inline-block;
+  margin-right: 4px;
+  animation: fadeIn 1s ease forwards; /* Slower animation */
+  animation-delay: 0.2s; /* Added delay before animation starts */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.slide {
+  transform: scale(0.98);
+  filter: blur(2px);
+  transition: opacity 0.8s ease, transform 0.6s ease, filter 0.6s ease;
+}
+
+.slide.active {
+  transform: scale(1);
+  filter: blur(0);
+}
+
+
+/* ANIMASI MASUK */
+.slide-title {
+  opacity: 0;
+  transform: scale(0.8);
+  animation: fadeZoomIn 1s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.slide-subtitle {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 1s ease-out forwards;
+  animation-delay: 0.8s;
+}
+
+.balloon {
+  width: 150px;
+  margin-top: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes fadeZoomIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+
+.music-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 111, 145, 0.8);
+  border: none;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.music-btn:hover {
+  background-color: rgba(255, 62, 108, 0.9);
+  transform: scale(1.1);
+}
+
+.music-btn.muted {
+  opacity: 0.6;
+}
+
+.music-icon {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+/* Tooltip */
+.music-btn::after {
+  content: 'Putar/Mute Musik';
+  position: absolute;
+  left: 50px;
+  white-space: nowrap;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.music-btn:hover::after {
+  opacity: 1;
+}
